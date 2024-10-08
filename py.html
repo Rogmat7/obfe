@@ -174,22 +174,6 @@
 </div>
 
 <script>
-    // Function to show pop-up on page load
-    window.onload = function() {
-        showPopup();
-    };
-
-    function showPopup() {
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('popupBackground').style.display = 'block';
-    }
-
-    // Function to hide pop-up
-    document.getElementById('popupClose').onclick = function() {
-        document.getElementById('popup').style.display = 'none';
-        document.getElementById('popupBackground').style.display = 'none';
-    };
-
     // Function to encrypt (obfuscate) the Python code using Rabbit encryption
     function obfuscateCode() {
         const code = document.getElementById("pythonCode").value;
@@ -233,7 +217,7 @@
         }
     }
 
-    // Function to copy the obfuscated or decrypted code to clipboard
+    // Function to copy the obfuscated or decrypted code to clipboard and show pop-up
     function copyToClipboard() {
         const outputCode = document.getElementById("outputCode").textContent;
 
@@ -255,7 +239,22 @@
         document.body.removeChild(tempTextArea);
 
         alert("Output copied to clipboard!");
+
+        // Show the pop-up after copying
+        showPopup();
     }
+
+    // Function to show pop-up
+    function showPopup() {
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('popupBackground').style.display = 'block';
+    }
+
+    // Function to hide pop-up
+    document.getElementById('popupClose').onclick = function() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('popupBackground').style.display = 'none';
+    };
 </script>
 
 </body>
