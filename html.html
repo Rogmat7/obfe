@@ -98,14 +98,15 @@
             // Encode each character to a more complex form
             let encrypted = "<script>(function(){var d=document,w='write',a='';";
             for (let i = 0; i < input.length; i++) {
-                let encodedChar = 'a+=String.fromCharCode(' + input.charCodeAt(i) + ');';
-                encrypted += encodedChar;
+                // Encode each character using charCodeAt
+                let charCode = input.charCodeAt(i);
+                encrypted += "a+=String.fromCharCode(" + charCode + ");";
             }
             encrypted += "d[w](a);})();</script>";
 
+            // Set the output text area value to the encrypted HTML
             document.getElementById('outputText').value = encrypted;
-            document.getElementById('outputText').classList.remove('hidden-output');
-            document.getElementById('inputText').value = encrypted;
+            document.getElementById('inputText').value = encrypted;  // Optionally update input field to show the encrypted code
         }
 
         function decryptHTML() {
@@ -115,19 +116,13 @@
                 return;
             }
 
-            // Regex to extract the obfuscated characters
-            let match = input.match(/String\.fromCharCode\((\d+)\)/g);
-            if (!match) {
-                alert("Invalid encrypted HTML code!");
-                return;
-            }
-
-            let decrypted = '';
-            match.forEach(function(m) {
-                let charCode = m.match(/\d+/)[0];
-                decrypted += String.fromCharCode(charCode);
+            // Regex to find all String.fromCharCode() calls in the input
+            const regex = /String\.fromCharCode\((\d+)\)/g;
+            let decrypted = input.replace(regex, (match, p1) => {
+                return String.fromCharCode(p1);
             });
 
+            // Set the decrypted HTML back to the input text area
             document.getElementById('inputText').value = decrypted;
         }
     </script>
