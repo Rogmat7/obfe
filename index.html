@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Obfuscator</title>
+    <title>Python Obfuscator with AES Encryption</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,35 +57,63 @@
 <body>
 
 <div class="container">
-    <h1>Python Obfuscator</h1>
+    <h1>Python Obfuscator with AES Encryption</h1>
 
     <label for="pythonCode">Enter your Python code:</label>
     <textarea id="pythonCode" placeholder="Write your Python code here..."></textarea>
 
-    <button onclick="obfuscateCode()">Obfuscate</button>
+    <label for="password">Enter a password for encryption:</label>
+    <input type="password" id="password" placeholder="Password" style="width: 100%; padding: 10px; font-size: 16px; margin: 10px 0;">
 
-    <h3>Obfuscated Code:</h3>
-    <pre id="obfuscatedCode"></pre>
+    <button onclick="obfuscateCode()">Obfuscate (Encrypt)</button>
+    <button onclick="decryptCode()">Decrypt</button>
+
+    <h3>Output:</h3>
+    <pre id="outputCode"></pre>
 </div>
 
 <script>
-    // Simple obfuscation function (basic character replacement)
+    // Function to encrypt (obfuscate) the Python code
     function obfuscateCode() {
         const code = document.getElementById("pythonCode").value;
+        const password = document.getElementById("password").value;
 
-        if (!code.trim()) {
-            alert("Please enter some Python code to obfuscate.");
+        if (!code.trim() || !password.trim()) {
+            alert("Please enter Python code and a password to obfuscate.");
             return;
         }
 
-        // A simple obfuscation algorithm - shifting character codes
-        let obfuscated = "";
-        for (let i = 0; i < code.length; i++) {
-            obfuscated += String.fromCharCode(code.charCodeAt(i) + 3);
+        // Encrypt the code using AES encryption
+        const encryptedCode = CryptoJS.AES.encrypt(code, password).toString();
+
+        // Display the encrypted (obfuscated) code
+        document.getElementById("outputCode").textContent = encryptedCode;
+    }
+
+    // Function to decrypt the obfuscated Python code
+    function decryptCode() {
+        const encryptedCode = document.getElementById("outputCode").textContent;
+        const password = document.getElementById("password").value;
+
+        if (!encryptedCode.trim() || !password.trim()) {
+            alert("Please enter a password to decrypt.");
+            return;
         }
 
-        // Display the obfuscated code
-        document.getElementById("obfuscatedCode").textContent = obfuscated;
+        try {
+            // Decrypt the code using AES decryption
+            const decryptedBytes = CryptoJS.AES.decrypt(encryptedCode, password);
+            const decryptedCode = decryptedBytes.toString(CryptoJS.enc.Utf8);
+
+            if (!decryptedCode) {
+                throw new Error("Incorrect password or corrupted data");
+            }
+
+            // Display the decrypted code
+            document.getElementById("outputCode").textContent = decryptedCode;
+        } catch (error) {
+            alert("Decryption failed. Please check the password.");
+        }
     }
 </script>
 
