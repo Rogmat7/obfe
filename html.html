@@ -52,10 +52,10 @@
         button:hover {
             background-color: #0056b3;
         }
-        #copyButton {
+        #copyBtn {
             background-color: #28a745;
         }
-        #copyButton:hover {
+        #copyBtn:hover {
             background-color: #218838;
         }
         pre {
@@ -146,21 +146,18 @@
 <div class="container">
     <h1>Python Obfuscator with Rabbit Encryption</h1>
 
-    <label for="codeInput">Enter your Python code:</label>
-    <textarea id="codeInput" placeholder="Write your Python code here..."></textarea>
-
-    <label for="passInput">Enter a password for encryption:</label>
-    <input type="password" id="passInput" placeholder="Password">
+    <label for="codeArea">Enter your Python code:</label>
+    <textarea id="codeArea" placeholder="Write your Python code here..."></textarea>
 
     <div class="button-container">
-        <button onclick="encryptCode()">Obfuscate (Encrypt)</button>
-        <button onclick="decryptCode()">Decrypt</button>
+        <button onclick="encryptPythonCode()">Obfuscate (Encrypt)</button>
+        <button onclick="decryptPythonCode()">Decrypt</button>
     </div>
 
     <h3>Output:</h3>
     <div class="output-container">
-        <pre id="resultOutput"></pre>
-        <button id="copyButton" onclick="copyToClipboard()">Copy Result</button>
+        <pre id="outputArea"></pre>
+        <button id="copyBtn" onclick="copyToClipboard()">Copy Result</button>
     </div>
 </div>
 
@@ -174,52 +171,50 @@
 </div>
 
 <script>
-    function encryptCode() {
-        const input = document.getElementById("codeInput").value;
-        const pass = document.getElementById("passInput").value;
+    function encryptPythonCode() {
+        const userInput = document.getElementById("codeArea").value;
 
-        if (!input.trim() || !pass.trim()) {
-            alert("Please enter Python code and a password to obfuscate.");
+        if (!userInput.trim()) {
+            alert("Please enter Python code to obfuscate.");
             return;
         }
 
-        const obfuscated = CryptoJS.Rabbit.encrypt(input, pass).toString();
-        document.getElementById("resultOutput").textContent = obfuscated;
+        const encryptedResult = CryptoJS.Rabbit.encrypt(userInput, "defaultPassword").toString();
+        document.getElementById("outputArea").textContent = encryptedResult;
     }
 
-    function decryptCode() {
-        const encoded = document.getElementById("resultOutput").textContent;
-        const pass = document.getElementById("passInput").value;
+    function decryptPythonCode() {
+        const encryptedCode = document.getElementById("outputArea").textContent;
 
-        if (!encoded.trim() || !pass.trim()) {
-            alert("Please enter a password to decrypt.");
+        if (!encryptedCode.trim()) {
+            alert("No code to decrypt.");
             return;
         }
 
         try {
-            const decrypted = CryptoJS.Rabbit.decrypt(encoded, pass);
-            const original = decrypted.toString(CryptoJS.enc.Utf8);
+            const decryptedBytes = CryptoJS.Rabbit.decrypt(encryptedCode, "defaultPassword");
+            const decryptedResult = decryptedBytes.toString(CryptoJS.enc.Utf8);
 
-            if (!original) {
-                throw new Error("Incorrect password or corrupted data");
+            if (!decryptedResult) {
+                throw new Error("Decryption failed.");
             }
 
-            document.getElementById("resultOutput").textContent = original;
+            document.getElementById("outputArea").textContent = decryptedResult;
         } catch (error) {
-            alert("Decryption failed. Please check the password.");
+            alert("Decryption failed. Please check the code.");
         }
     }
 
     function copyToClipboard() {
-        const output = document.getElementById("resultOutput").textContent;
+        const outputText = document.getElementById("outputArea").textContent;
 
-        if (!output.trim()) {
+        if (!outputText.trim()) {
             alert("No code to copy.");
             return;
         }
 
         const tempTextArea = document.createElement("textarea");
-        tempTextArea.value = output;
+        tempTextArea.value = outputText;
         document.body.appendChild(tempTextArea);
         tempTextArea.select();
         document.execCommand("copy");
