@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Obfuscator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Python Obfuscator</h1>
+
+    <label for="pythonCode">Enter your Python code:</label>
+    <textarea id="pythonCode" placeholder="Write your Python code here..."></textarea>
+
+    <button onclick="obfuscateCode()">Obfuscate</button>
+
+    <h3>Obfuscated Code:</h3>
+    <pre id="obfuscatedCode"></pre>
+</div>
+
+<script>
+    // Simple obfuscation function (basic character replacement)
+    function obfuscateCode() {
+        const code = document.getElementById("pythonCode").value;
+
+        if (!code.trim()) {
+            alert("Please enter some Python code to obfuscate.");
+            return;
+        }
+
+        // A simple obfuscation algorithm - shifting character codes
+        let obfuscated = "";
+        for (let i = 0; i < code.length; i++) {
+            obfuscated += String.fromCharCode(code.charCodeAt(i) + 3);
+        }
+
+        // Display the obfuscated code
+        document.getElementById("obfuscatedCode").textContent = obfuscated;
+    }
+</script>
+
+</body>
+</html>
