@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f0f0f0 0%, #d3d3d3 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -18,93 +18,92 @@
 
         .container {
             width: 70%;
-            max-width: 900px;
-            padding: 60px;
+            max-width: 800px;
+            padding: 50px;
             background-color: #fff;
-            border-radius: 20px;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: #444;
-            margin-bottom: 40px;
-            font-weight: 600;
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 500;
         }
 
         .btn-container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            gap: 30px;
-            margin-top: 40px;
+            gap: 20px;
         }
 
         .button {
-            position: relative;
-            padding: 15px 20px; /* Mengurangi padding kiri-kanan lebih jauh */
-            font-size: 1.2rem;
+            padding: 15px 25px;
+            font-size: 1rem;
             color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            background-color: #5a67d8;
+            border-radius: 8px;
             text-decoration: none;
-            background-color: #667eea;
-            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+            position: relative;
             overflow: hidden;
-            transition: 0.4s ease;
             flex: 1;
-            text-align: left; /* Teks lebih condong ke kiri */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .button:hover {
-            background-color: #5647d7;
-            transform: translateY(-5px);
-            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+            background-color: #434190;
         }
 
         .button span {
             position: absolute;
             display: block;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .button span:nth-child(1),
+        .button span:nth-child(3) {
+            width: 100%;
+            height: 2px;
+        }
+
+        .button span:nth-child(2),
+        .button span:nth-child(4) {
+            width: 2px;
+            height: 100%;
         }
 
         .button span:nth-child(1) {
             top: 0;
             left: -100%;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5));
-            animation: btn-anim1 2s linear infinite;
+            animation: slideRight 1s linear infinite;
         }
 
         .button span:nth-child(2) {
             top: -100%;
             right: 0;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.5));
-            animation: btn-anim2 2s linear infinite;
+            animation: slideDown 1s linear infinite;
         }
 
         .button span:nth-child(3) {
             bottom: 0;
             right: -100%;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(270deg, transparent, rgba(255, 255, 255, 0.5));
-            animation: btn-anim3 2s linear infinite;
+            animation: slideLeft 1s linear infinite;
         }
 
         .button span:nth-child(4) {
             bottom: -100%;
             left: 0;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(360deg, transparent, rgba(255, 255, 255, 0.5));
-            animation: btn-anim4 2s linear infinite;
+            animation: slideUp 1s linear infinite;
         }
 
-        @keyframes btn-anim1 {
+        @keyframes slideRight {
             0% {
                 left: -100%;
             }
@@ -113,7 +112,7 @@
             }
         }
 
-        @keyframes btn-anim2 {
+        @keyframes slideDown {
             0% {
                 top: -100%;
             }
@@ -122,7 +121,7 @@
             }
         }
 
-        @keyframes btn-anim3 {
+        @keyframes slideLeft {
             0% {
                 right: -100%;
             }
@@ -131,7 +130,7 @@
             }
         }
 
-        @keyframes btn-anim4 {
+        @keyframes slideUp {
             0% {
                 bottom: -100%;
             }
@@ -139,6 +138,7 @@
                 bottom: 100%;
             }
         }
+
     </style>
 </head>
 <body>
@@ -159,3 +159,4 @@
 
 </body>
 </html>
+
