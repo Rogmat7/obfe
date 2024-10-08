@@ -71,8 +71,12 @@
         }
         .button-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .output-container {
+            text-align: center;
         }
     </style>
 </head>
@@ -88,15 +92,15 @@
     <input type="password" id="password" placeholder="Password">
 
     <div class="button-container">
-        <div>
-            <button onclick="obfuscateCode()">Obfuscate (Encrypt)</button>
-            <button onclick="decryptCode()">Decrypt</button>
-        </div>
-        <button id="copyButton" onclick="copyToClipboard()">Copy Result</button>
+        <button onclick="obfuscateCode()">Obfuscate (Encrypt)</button>
+        <button onclick="decryptCode()">Decrypt</button>
     </div>
 
     <h3>Output:</h3>
-    <pre id="outputCode"></pre>
+    <div class="output-container">
+        <pre id="outputCode"></pre>
+        <button id="copyButton" onclick="copyToClipboard()">Copy Result</button>
+    </div>
 </div>
 
 <script>
