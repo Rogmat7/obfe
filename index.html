@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Obfuscator with AES Encryption</title>
+    <title>Python Obfuscator with Rabbit Encryption</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         body {
@@ -83,7 +83,7 @@
 <body>
 
 <div class="container">
-    <h1>Python Obfuscator with AES Encryption</h1>
+    <h1>Python Obfuscator with Rabbit Encryption</h1>
 
     <label for="pythonCode">Enter your Python code:</label>
     <textarea id="pythonCode" placeholder="Write your Python code here..."></textarea>
@@ -104,7 +104,7 @@
 </div>
 
 <script>
-    // Function to encrypt (obfuscate) the Python code
+    // Function to encrypt (obfuscate) the Python code using Rabbit encryption
     function obfuscateCode() {
         const code = document.getElementById("pythonCode").value;
         const password = document.getElementById("password").value;
@@ -114,14 +114,14 @@
             return;
         }
 
-        // Encrypt the code using AES encryption
-        const encryptedCode = CryptoJS.AES.encrypt(code, password).toString();
+        // Encrypt the code using Rabbit encryption
+        const encryptedCode = CryptoJS.Rabbit.encrypt(code, password).toString();
 
         // Display the encrypted (obfuscated) code
         document.getElementById("outputCode").textContent = encryptedCode;
     }
 
-    // Function to decrypt the obfuscated Python code
+    // Function to decrypt the obfuscated Python code using Rabbit decryption
     function decryptCode() {
         const encryptedCode = document.getElementById("outputCode").textContent;
         const password = document.getElementById("password").value;
@@ -132,8 +132,8 @@
         }
 
         try {
-            // Decrypt the code using AES decryption
-            const decryptedBytes = CryptoJS.AES.decrypt(encryptedCode, password);
+            // Decrypt the code using Rabbit decryption
+            const decryptedBytes = CryptoJS.Rabbit.decrypt(encryptedCode, password);
             const decryptedCode = decryptedBytes.toString(CryptoJS.enc.Utf8);
 
             if (!decryptedCode) {
