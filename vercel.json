@@ -1,6 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/js", "destination": "/js.html" },
-    { "source": "/python", "destination": "/python.html" }
-  ]
-}
